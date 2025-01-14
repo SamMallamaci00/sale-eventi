@@ -1,0 +1,38 @@
+#login {
+    display: flex;
+    justify-content: center; /* Centra orizzontalmente il modal */
+    align-items: center; /* Centra verticalmente il modal */
+    position: fixed; /* Posiziona il modal rispetto alla finestra del viewport */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Assicura che lo sfondo copra tutto lo schermo */
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Sfondo scuro semi-trasparente */
+    z-index: 1050; /* Assicurati che sia in primo piano */
+}
+
+.modal-login {
+    max-width: 600px; /* Larghezza massima del modal */
+    width: 25%; /* Si adatta allo schermo */
+}
+
+.modal-register {
+
+    max-width: 800px; /* Larghezza massima del modal */
+    width: 50%; /* Si adatta allo schermo */
+}
+
+.form-row {
+    display: flex;
+    gap: 10px; /* Spazio tra i campi */
+}
+
+.form-group.col {
+    flex: 1; /* Larghezza uniforme per ciascun campo */
+}
+
+.is-invalid {
+    border-color: red;
+  }
+  
+

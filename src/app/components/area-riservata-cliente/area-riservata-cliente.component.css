@@ -1,0 +1,59 @@
+.is-invalid {
+    border-color: #dc3545; /* Rosso */
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  }
+  .invalid-feedback {
+    color: #dc3545;
+  }
+
+  .row-collapse {
+    display: flex;
+    justify-content: center;  /* Centra gli elementi orizzontalmente */
+    width: 100%; /* La riga occupa tutta la larghezza disponibile */
+    margin-bottom: 1rem;  /* Aggiungi spazio sotto la riga */
+  }
+  
+  .container {
+    display: flex;
+  flex-direction: column; /* Dispone gli elementi verticalmente */
+  justify-content: center; /* Centra gli elementi verticalmente */
+  align-items: center; /* Centra gli elementi orizzontalmente */
+    position: relative;
+    
+    width: 100%;
+  
+  }
+
+  .label {
+    margin-right: 5px; /* Distanza tra etichetta e input */
+    margin-top: 1rem;  /* Spazio sopra il pulsante */
+  
+  }
+
+  .btn{
+    margin-top: 1rem;  /* Spazio sopra il pulsante */
+
+  }
+
+  .table{
+    width: 1000px;
+  }
+  
+  .small-input {
+    padding: 0.375rem 0.75rem;  /* Padding interno */
+    margin-right: 15px;  /* Spazio tra gli input */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);  /* Aggiungi una leggera ombra */
+    margin-top: 1rem;  /* Spazio sopra il pulsante */
+  
+  }
+
+  .card-body {
+    width: 600px;  /* Imposta la larghezza della card */
+    padding: 20px; /* Aggiungi del padding all'interno */
+    display: flex;
+    flex-direction: column; /* Disporre gli elementi in colonna */
+    align-items: center;  /* Centra gli elementi al suo interno */
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Aggiungi una leggera ombra alla card */
+    margin-bottom: 20px;
+  }

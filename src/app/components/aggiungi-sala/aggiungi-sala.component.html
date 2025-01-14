@@ -1,0 +1,87 @@
+<div class="row mb-4">
+    <!-- Selezione immagine -->
+    <div class="col-md-12 mb-3">
+        <label for="fileInput" class="form-label">Immagine sala</label>
+        <!-- Visualizzazione immagine -->
+        <div class="d-flex justify-content-center mb-3">
+            <div>
+                <img *ngIf="immagine" src="data:image/jpg;base64,{{immagine}}" alt="Immagine pacchetto" class="img-thumbnail" style="width: 100%; max-width: 400px; height: auto;">
+                <span *ngIf="!immagine" class="text-muted">Nessuna immagine disponibile</span>
+            </div>
+        </div>
+        <!-- Selezione file -->
+        <input type="file" id="fileInput" class="form-control" (change)="onFileSelected($event)">
+    </div>
+</div>
+
+<div class="row mb-4">
+    <!-- Descrizione pacchetto -->
+    <div class="col-md-12 mb-3">
+        <label for="descrizione" class="form-label">Nome sala</label>
+        <textarea id="descrizione" class="form-control form-control-lg" placeholder="Scrivi qui il titolo del pacchetto turistico" rows="5" [(ngModel)]="nome" name="nome"></textarea>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <!-- Descrizione pacchetto -->
+    <div class="col-md-12 mb-3">
+        <label for="descrizione" class="form-label">Descrizione sala</label>
+        <textarea id="descrizione" class="form-control form-control-lg" placeholder="Scrivi qui la descrizione del pacchetto turistico" rows="5" [(ngModel)]="descrizione" name="descrizione"></textarea>
+    </div>
+</div>
+
+<div class="row align-items-end mb-4">
+
+    <div class="col-md-6 mb-3">
+        <label for="prezzo" class="form-label">Capienza</label>
+        <input type="text" id="prezzo" class="form-control" placeholder="Prezzo" [(ngModel)]="capienza" name="capienza">
+    </div>
+    <!-- Prezzo -->
+    <div class="col-md-6 mb-3">
+        <label for="prezzo" class="form-label">Prezzo</label>
+        <input type="text" id="prezzo" class="form-control" placeholder="Prezzo" [(ngModel)]="prezzo" name="prezzo">
+    </div>
+
+    <!-- Pulsante salva -->
+    <div class="col-md-6 d-flex justify-content-end">
+        <button
+                        class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModalCenter"
+                        (click)="saveSala()"
+
+                       
+                    >
+                        <i class="fas fa-save"></i> Salva
+                    </button>
+
+                    <div *ngIf="!valid && checked == true" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content ">
+                                <!-- Alert message -->
+                                <div class=" alert alert-danger mb-0">
+                                    <h5 class="alert-heading">Compila tutti i campi correttamente!</h5>
+                                    <p>Per favore, assicurati di riempire tutti i campi obbligatori prima di inviare.</p>
+                                
+                                <!-- Modal Footer with Close Button -->
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Chiudi</button>
+                                </div>
+                            </div>
+                        </div>
+
+                     </div>
+                     <div *ngIf="valid && checked == true" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered " role="document">
+                            <div class="modal-content success-modal">
+                                <div class="modal-header">
+                                    <h5 class="modal-title text-center w-100" id="exampleModalLongTitle">Pacchetto aggiunto con successo</h5>
+                                </div>
+                                <div class="modal-footer d-flex justify-content-center">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Chiudi</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+    
+</div>
+
+

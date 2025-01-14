@@ -1,0 +1,156 @@
+<div class="container justify-content-center">
+    <p>
+        <button class="btn btn-toggle" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Filtri
+        </button>
+    </p>
+
+    
+    <div class="collapse" id="collapseExample">
+      <div class="card card-body">
+          <div class="row-collapse align-items-center mb-3"> <!-- Spazio sotto la riga -->
+              <label class="label me-3 mb-0">Prezzo</label>
+              <input type="text" class="form-control small-input me-5" placeholder="Prezzo" name="prezzo" [(ngModel)]="prezzo">
+               <!-- Rimuove lo zero -->
+  
+              <label class="label me-3 mb-0">Capienza</label>
+              <input type="text" class="form-control small-input me-5" placeholder="Capienza" name="capienza" [(ngModel)]="capienza">
+  
+              <button class="btn  ms-2" type="button" (click)="applica()">Applica</button>
+          </div>
+      </div>
+  </div>
+  
+  
+  
+  
+
+  <div class="container1 mt-4 px-3">
+    <div *ngIf="sale.length > 0; else noSale">
+
+    <div class="row">
+        <!-- Mostra solo le sale della pagina corrente -->
+        <div 
+            class="col" 
+            *ngFor="let sala of sale | paginate: { itemsPerPage: itemsPerPage, currentPage: page }; let i = index" 
+            [class.mt-4]="i >= 3" 
+            [class.mb-4]="i >= 3" 
+
+            data-toggle="modal" 
+            data-target="#salaModal">
+            <app-card-sala 
+                [data]="sala" 
+                (click)="openModal(sala)">
+            </app-card-sala>
+        </div>
+    </div>
+
+    <!-- Controlli di paginazione -->
+    <div class="d-flex justify-content-center mt-3" *ngIf="sale.length > itemsPerPage">
+      <pagination-controls 
+          (pageChange)="page = $event" 
+          >
+      </pagination-controls>
+  </div>
+  
+</div>
+
+
+
+<ng-template #noSale>
+  <div class="alert alert-warning text-center" role="alert">
+    <strong>Non ci sono sale disponibili.</strong> Prova a modificare i filtri o verifica più tardi.
+  </div>
+</ng-template>
+
+
+
+
+    
+
+
+<!-- Modale per mostrare i dettagli -->
+
+<div 
+  class="modal fade" 
+  tabindex="-1" 
+  role="dialog" 
+  id="salaModal" 
+  aria-labelledby="salaModalLabel" 
+  aria-hidden="true" 
+  *ngIf="showModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ selectedSala?.nome }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        
+
+        <p><strong>Descrizione:</strong> </p>
+        <p [innerHTML]="formatDescription(selectedSala?.descrizione)"></p>
+        <p><strong>Prezzo per evento:</strong> € {{ selectedSala?.prezzo }}</p>
+        <p><strong>Capienza massima:</strong> {{ selectedSala?.capienza }} persone</p>
+
+        <!-- Form per la selezione della data di check-in -->
+        <form *ngIf="showVerifica" class="mb-4">
+          <div class="mb-3">
+            <label for="checkin" class="form-label" [ngClass]="{'text-danger': isDatanull}">
+                {{ isDatanull ? 'Inserisci una data valida' : 'Inserisci una data' }}
+              </label>
+            <input 
+              type="date" 
+              id="checkin" 
+              name="checkin" 
+              [(ngModel)]="data"
+              [ngClass]="{'is-invalid': isDatanull}"
+              (ngModelChange)="onDateChange()"
+              class="form-control" 
+              placeholder="Seleziona una data"
+              aria-describedby="dateHelp">
+            
+          </div>
+        </form>
+
+        <!-- Messaggio di successo -->
+        <div *ngIf="mostraSuccesso" class="alert alert-success text-center" role="alert">
+          <strong>Sala prenotata con successo!</strong>
+        </div>
+
+        <!-- Messaggio di errore -->
+        <div *ngIf="mostraErrore" class="alert alert-danger text-center" role="alert">
+          <strong>{{ erroreMessaggio }}</strong>
+        </div>
+
+        <!-- Messaggio di disponibilità della sala -->
+        <div *ngIf="checked" class="alert text-center" [ngClass]="{'alert-success': disponibile, 'alert-danger': !disponibile}" role="alert">
+          <label for="checkin" class="form-label">
+            {{ disponibile ? 'Sala disponibile!' : 'Sala non disponibile, inserisci una nuova data' }}
+          </label>
+        </div>
+      </div>
+
+      <div *ngIf="!isAuthenticated() && disponibile" class=" alert text-center alert-login alert-danger" role="alert">
+        <label class="form-label">Devi accedere o registrarti per procedere con la prenotazione.</label>
+      </div>
+
+      <div class="modal-footer">
+        <!-- Bottoni di azione -->
+        <button type="button" class="btn btn-success" *ngIf="!showVerifica" (click)="openVerifica()">Inserisci data per la disponibilità</button>
+        <button type="button" class="btn btn-warning" *ngIf="showVerifica && !disponibile" (click)="verificaDisp(selectedSala.id)">Verifica disponibilità</button>
+        <button type="button" class="btn btn-success" *ngIf="disponibile" (click)="prenota(selectedSala.id)" [disabled]="!isAuthenticated()">Prenota</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Chiudi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+

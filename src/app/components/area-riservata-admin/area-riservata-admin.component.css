@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+/* Contenitore principale */
+.container {
+  display: flex;
+  text-align: center;
+flex-direction: column; /* Dispone gli elementi verticalmente */
+justify-content: center; /* Centra gli elementi verticalmente */
+align-items: center; /* Centra gli elementi orizzontalmente */
+  position: relative;
+  
+  width: 100%;
+
+}
+
+
+.navMenu {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly; /* Distribuisce uniformemente i link */
+  align-items: center;
+  padding: 15px 0;
+}
+
+.navMenu a {
+  text-align: center;
+  color: black;
+  text-decoration: none;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 10px 20px;
+  transition: color 0.3s ease;
+}
+
+.navMenu a:hover {
+  color: white; /* Colore al passaggio del mouse */
+background-color: #333;
+}
+
+
+
+
+/* Contenitore per il contenuto sotto il menu */
+.router-container {
+  margin-top: 5px; /* Distanza tra il menu e il contenuto */
+
+}
+
+@media (max-width: 768px) {
+  .navMenu {
+    flex-direction: column;  /* Menu a colonna sui dispositivi piccoli */
+    align-items: center;
+  }
+
+  .navMenu a {
+    font-size: 1em;  /* Riduce la dimensione dei link sui dispositivi più piccoli */
+    padding: 8px 12px;
+  }
+
+  .content-container {
+    padding: 10px;
+  }
+}

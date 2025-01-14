@@ -1,0 +1,109 @@
+<div id="login" class="modal fade show" style="display: block;" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered"
+      [ngClass]="isRegisterMode ? 'modal-register' : 'modal-login'">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ isRegisterMode ? 'Registrazione' : 'Login' }}</h5>
+          <button type="button" class="close" aria-label="Close" (click)="close.emit()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+          <!-- Form di Login -->
+          <form *ngIf="!isRegisterMode" (submit)="login($event)">
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password">
+            </div>
+  
+            <div>
+              Non sei registrato? 
+              <a href="#" (click)="toggleMode()">Crea un nuovo account</a>
+            </div>
+            <button class="btn" type="submit" >Accedi</button>
+          </form>
+  
+          <!-- Form di Registrazione (submit)="register($event)" [(ngModel)]="confirmPassword"-->
+          <form *ngIf="isRegisterMode">
+            <!-- Raggruppa Nome e Cognome -->
+            <div class="form-row">
+                <div class="form-group col">
+                    <label for="name">Username</label>
+                    <input type="text" class="form-control" id="name" [(ngModel)]="username" name="username">
+                </div>
+                
+            </div>
+        
+            <!-- Raggruppa Email e Password -->
+            <div class="form-row">
+                <div class="form-group col">
+                  <div class="form-row">
+  
+                    <label for="email">Email</label>
+                    <div class="text-danger">
+                  Inserisci un'email valida.
+                </div> 
+                  </div>
+                  <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" [ngClass]="{'is-invalid': emailError}">
+                    
+                </div>
+  
+                <!-- Messaggio di errore per email non valida -->
+                
+  
+  
+                <div class="form-group col">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" [ngClass]="{'is-invalid': passwordMismatchError}">
+                  </div>
+            </div>
+        
+            <!-- Conferma Password -->
+            <div class="form-group">
+              <div class="form-row">
+  
+              
+                    
+                <label for="confirmPassword">Conferma Password</label>
+                <div *ngIf="passwordMismatchError" class="text-danger">
+                          Le password non coincidono.
+                        </div>
+              </div>
+              <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" [ngClass]="{'is-invalid': passwordMismatchError}">
+                
+            </div>
+  
+  
+            
+            <div>
+              Sei già registrato? 
+              <button class="btn"  type="submit"  >Accedi</button>
+            </div>
+            <button class="btn" type="submit" (click)="registarti($event)"  data-toggle="modal" data-target="#registrazione">Registrati</button>
+            <div *ngIf="!emailError && !passwordMismatchError" class="modal fade" id="registrazione" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered " role="document">
+                  <div class="modal-content success-modal">
+                      <div class="modal-header">
+                          <h5 class="modal-title text-center w-100" id="exampleModalLongTitle">Ti sei registrato con successo</h5>
+                      </div>
+                      <div>
+                        <p class="text-center">Accedi per prenotare una stanza nel nostro B&B!</p>
+                      </div>
+                      <div class="modal-footer d-flex justify-content-center">
+                          <button type="button" class="btn btn-success" data-dismiss="modal">Chiudi</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  

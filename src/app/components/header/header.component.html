@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand-sm ">
+    <div class="container-fluid"> 
+  
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <button  (click)="areaRiservata()">Area riservata</button>
+      </li>
+    </ul>
+   
+      <!-- Logo in the center -->
+      <ul class="navbar-nav mx-auto logo">
+        <li class="nav-item ">
+          <img src="assets/images/logo.png" width="300" height="225" alt="" [routerLink]="'/'">
+        </li>
+      </ul>
+  
+      <!-- Login/Logout buttons -->
+      <ul class="navbar-nav ml-auto">
+  
+       
+        <li class="nav-item" *ngIf="!isAuthenticated()">
+          <button  (click)="openModal()">Accedi</button>
+          <app-login *ngIf="isModalOpen" (close)="closeModal()"></app-login>
+      </li>
+      <li class="nav-item" *ngIf="isAuthenticated()">
+        <button  (click)="logout()">Logout</button>
+      </li>
+     
+        
+      </ul>
+    </div>

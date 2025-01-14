@@ -1,0 +1,142 @@
+ <div class="container">
+
+    <p>
+        <button class="btn btn-toggle" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            Filtri
+        </button>
+    </p>
+
+
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+        <div class="row-collapse align-items-center mb-3"> <!-- Spazio sotto la riga -->
+            <label class="label me-3 mb-0">Sala</label>
+            <input type="text" class="form-control small-input me-5" placeholder="Sala" name="Sala" [(ngModel)]="sala">
+
+            
+
+            <label class="label me-3 mb-0">Data</label>
+            <input 
+              type="date" 
+              id="dataFiltro" 
+              name="dataFiltro" 
+              [(ngModel)]="data"
+              class="form-control small-input" 
+              placeholder="Seleziona una data"
+              aria-describedby="dateHelp">
+            
+            <button class="btn  ms-2" type="button" (click)="applica()">Applica</button>
+        </div>
+    </div>
+</div>
+
+
+  <div *ngIf="prenotazioni.length > 0; else noPrenotazioni">
+  <table class="table ">
+      <thead>
+          <tr>
+              
+              <th scope="col" class="text-center">SALA</th>
+              <th scope="col" class="text-center">DATA</th>
+              <th scope="col" class="text-center">PREZZO</th>
+          </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let pr of prenotazioni | paginate: { itemsPerPage: 5, currentPage: page }">
+      
+          <td class="text-center">{{pr.sala.nome}}</td>
+          <td class="text-center">{{pr.data | date: 'dd/MM/yyyy'}}</td>
+          <td class="text-center">{{pr.costo | currency: 'EUR'}}</td>
+          <td class="text-center">
+      
+              <button class="btn btn btn-success btn-sm" data-toggle="modal" data-target="#dettagliModal" (click)="openModal(pr)">
+                  <i class="fas fa-trash-alt">Modifica</i>
+              </button>
+
+              
+        </tr>
+      </tbody>
+    </table>
+    <div style="text-align: center; margin-top: 20px;">
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+  
+
+        <!-- Modale per i dettagli -->
+  <div 
+  class="modal fade" 
+  tabindex="-1" 
+  role="dialog" 
+  id="dettagliModal" 
+  aria-labelledby="salaModalLabel" 
+  aria-hidden="true" 
+  *ngIf="showModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ selectedPren?.sala.nome }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Dettagli della prenotazione -->
+        <p><strong>Descrizione:</strong> </p>
+        <p [innerHTML]="formatDescription(selectedPren?.sala.descrizione)"></p>
+        <p><strong>Prezzo per evento:</strong> € {{ selectedPren?.sala.prezzo }}</p>
+        <p><strong>Capacità massima:</strong> {{ selectedPren?.sala.capienza }} persone</p>
+        <p><strong>Data:</strong> {{ selectedPren?.data | date: 'dd/MM/yyyy' }}</p>
+
+        <!-- Form modifica data -->
+        <form>
+          <div class="mb-3">
+              <label for="checkin" class="form-label" [ngClass]="{'text-danger': isDatanull}">
+                  {{ isDatanull ? 'Inserisci una data valida' : 'Inserisci una nuova data' }}
+                </label>
+
+            <input 
+              type="date" 
+              id="checkin" 
+              name="checkin" 
+              class="form-control" 
+              (ngModelChange)="onDateChange()"
+              [ngClass]="{'is-invalid': isDatanull}"              
+              [(ngModel)]="data">
+            <small id="dateHelp" class="form-text text-muted">
+            </small>
+          </div>
+        </form>
+      </div>
+
+      <!-- Messaggio di successo -->
+      <div *ngIf="mostraSuccesso" class="alert alert-success text-center" role="alert">
+        <strong>Modifica completata con successo!</strong>
+      </div>
+
+        <!-- Messaggio di errore -->
+        <div *ngIf="mostraErrore" class="alert alert-danger text-center" role="alert">
+          <strong>{{ erroreMessaggio }}</strong>
+        </div>
+
+      
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" (click)="modificaPren(selectedPren?.id)">Modifica</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Chiudi</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+</div>
+
+
+<ng-template #noPrenotazioni>
+  <div class="alert alert-warning text-center" role="alert">
+    <strong>Non ci sono prenotazioni disponibili.</strong> Prova a modificare i filtri o verifica più tardi.
+  </div>
+</ng-template>
+
+
+  
+</div> 

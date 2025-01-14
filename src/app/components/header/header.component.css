@@ -1,0 +1,220 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    overflow-x: hidden; /* Prevent horizontal scroll */
+  }
+  
+  
+  
+  
+  
+  .navbar-nav .btn {
+    font-family: 'Playfair Display', serif; /* Utilizzo del font principale per pulsanti o CTA */
+      font-weight: 200;
+      background-color: #333; /* Sfondo del pulsante */
+      color: #fff; /* Colore del testo */
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+  }
+  
+  .navbar-nav .btn:hover {
+    background-color: #555; /* Colore di sfondo al passaggio del mouse */
+    
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between; /* Mantieni gli spazi tra gli elementi */
+    align-items: center; /* Centra verticalmente */
+    margin-top: -60px;
+  
+  }
+
+  
+  
+  .navbar-nav.mx-auto {
+    display: flex;
+    justify-content: center; /* Centra il logo */
+    flex-grow: 1; /* Impedisce che altri elementi influenzino la posizione del logo */
+  }
+  
+  .navbar-nav li {
+    margin: 0 15px; /* Imposta margini costanti per evitare variazioni */
+  }
+  
+  
+  
+  
+  .logo {
+    cursor: pointer;
+    margin-top: 25px;
+    
+  }
+  
+  .side-menu {
+    position: fixed;
+    top: 100px;;
+    left: -100%; /* Hidden off-screen */
+    height: 100vh;
+    width: 100%; /* Full width */
+    background-color: rgba(255, 255, 255, 0.989); /* Colore sfondo con opacità per vedere lo sfondo sfocato */
+    backdrop-filter: blur(10px); /* Applicare sfocatura allo sfondo */
+  
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    transition: left 0.3s ease;
+    z-index: 1000; /* Ensure the menu is above other elements */
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;}
+  
+  .menu-items {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 20px; /* Space from the top */
+    text-align: center; /* Align text to the left */
+    list-style: none;
+  }
+  
+  .menu-items li {
+    margin-bottom: 1.5rem;
+  }
+  
+  .menu-items a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #0e2431;
+    font-weight: 500;
+    font-size: 1.5rem;
+  }
+  
+  .menu-items a:hover {
+    font-weight: bolder;
+  }
+  
+  /* Show the side menu when isMenuOpen is true */
+  .show-menu {
+    left: 0; /* Move the menu into view */
+    position: absolute;
+    
+  }
+  
+  
+  
+  .checkbox {
+    display: none; /* Nasconde il checkbox */
+  }
+  
+  .nav-container .checkbox {
+    position: relative;
+    display: block;
+    height: 32px;
+    width: 190px;
+    top: 20px;
+    left: 20px;
+    z-index: 5;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .navbar-nav button {
+    left: 20px;
+    min-width: 100px; /* Imposta una larghezza minima per i pulsanti */
+  }
+  
+  .nav-container .hamburger-lines {
+    display: block;
+    height: 26px;
+    width: 32px;
+    position: absolute;
+    top: 34px;
+    left: 20px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    
+  }
+  
+  .nav-container .hamburger-lines .line {
+    display: block;
+    height: 4px;
+    width: 100%;
+    border-radius: 10px;
+    background: #0e2431;
+  }
+  
+  
+  
+  .nav-container .hamburger-lines .line1 {
+    transform-origin: 0% 0%;
+    transition: transform 0.4s ease-in-out, width 0.4s  ease-in-out;
+  }
+  
+  .nav-container .hamburger-lines .line2 {
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .nav-container .hamburger-lines .line3 {
+    transform-origin: 0% 100%;
+    transition: transform 0.4s ease-in-out,  width 0.4s  ease-in-out;
+  }
+  
+  
+  
+  
+  /* Trasformazioni quando il checkbox è selezionato */
+  input[type="checkbox"]:checked + .hamburger-lines .line1 {
+    transform: rotate(45deg); /* Ruota la linea per formare la parte superiore della X */
+  
+  }
+  
+  input[type="checkbox"]:checked + .hamburger-lines .line2 {
+    opacity: 0; /* Scompare la linea centrale */
+  }
+  
+  input[type="checkbox"]:checked + .hamburger-lines .line3 {
+    transform: rotate(-45deg); /* Ruota la linea per formare la parte inferiore della X */
+  
+  }
+  
+  
+  
+  
+  .fa {
+    padding: 20px;
+    font-size: 20px;
+    width: 32px;
+    height: 32px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius:50%;
+      display: flex; /* Abilita Flexbox */
+    justify-content: center; /* Allinea orizzontalmente */
+    align-items: center;}
+  
+  /* Add a hover effect if you want */
+  .fa:hover {
+    opacity: 0.7;
+  }
+  
+  /* Set a specific color for each brand */
+  
+  /* Facebook */
+  .fa-facebook {
+    background: #3B5998;
+    color: white !important;
+  }
+  
+  
+  
+  

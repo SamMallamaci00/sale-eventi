@@ -1,1 +1,143 @@
-/* You can add global styles to this file, and also import other style files */
+/* Stili generali per il corpo della pagina */
+body {
+    font-family: 'Lora', serif; /* Font principale per il testo */
+    color: #333; /* Colore del testo principale */
+    line-height: 1.6; /* Interlinea per una buona leggibilità */
+    margin: 0;
+    padding: 0;
+}
+
+/* Titoli principali - Playfair Display */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif; /* Font per i titoli */
+    font-weight: 700; /* Stile grassetto per maggiore enfasi */
+    color: #111; /* Colore dei titoli */
+}
+
+/* Sottotitoli */
+h2, h3 {
+    font-weight: 400; /* Leggermente più leggero per i sottotitoli */
+}
+
+/* Paragrafi e testo normale */
+p {
+    font-family: 'Lora', serif; /* Font per i paragrafi */
+    font-size: 16px; /* Dimensione del testo */
+    margin: 0 0 20px; /* Margine inferiore per separare i paragrafi */
+}
+
+/* Esempio di stile per il pulsante */
+button {
+    font-family: 'Playfair Display', serif; /* Utilizzo del font principale per pulsanti o CTA */
+    font-weight: 400;
+    background-color: #333; /* Sfondo del pulsante */
+    color: #fff; /* Colore del testo */
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 10px solid #333;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #555; /* Colore di sfondo al passaggio del mouse */
+}
+
+#tabella {
+    top: 50px;
+    width: 10%; /* Regola la larghezza come desideri (facoltativo) */
+  }
+  
+  #tabella th, #tabella td {
+    padding: 10px 16px;
+    text-align: center; /* Centra il testo in ciascuna cella */
+    width: 190px;
+  }
+
+  #tabella tr{
+    width: 100%;
+
+
+  }
+
+  /* Contenitore per il contenuto sotto il menu */
+.router-container {
+  margin-top: 20px; /* Distanza tra il menu e il contenuto */
+   /* Colore di sfondo del contenuto */
+   min-height: 50vh;
+
+
+}
+
+/* Stile per la finestra modale di conferma */
+.success-modal {
+  background-color: #28a745; /* Colore verde */
+  color: white; /* Testo bianco */
+  border: none; /* Rimuove il bordo */
+}
+
+.success-modal .modal-header {
+  border-bottom: none; /* Rimuove la riga di separazione */
+  display: flex;
+  justify-content: center; /* Centra il testo nel modal header */
+}
+
+.success-modal .modal-title {
+  color: white; /* Colore titolo bianco */
+  text-align: center; /* Centra il titolo */
+  width: 100%; /* Si assicura che l'elemento abbia tutta la larghezza disponibile */
+}
+
+.success-modal .modal-footer {
+  border-top: none; /* Rimuove il bordo superiore */
+}
+
+.success-modal .btn-success {
+  background-color: #218838; /* Colore verde per il pulsante */
+  border-color: #218838; /* Bordi verdi per il pulsante */
+}
+
+.success-modal .btn-success:hover {
+  background-color: #1e7e34; /* Verde più scuro al passaggio del mouse */
+  border-color: #1c7430; /* Bordi verdi più scuri */
+}
+
+.navMenu {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly; /* Distribuisce uniformemente i link */
+  align-items: center;
+  padding: 15px 0;
+}
+
+
+.navMenu a {
+  text-align: center;
+  color: black;
+  text-decoration: none;
+  font-size: 1.2em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 10px 20px;
+  transition: color 0.3s ease;
+}
+
+.navMenu a:hover {
+color: white; /* Colore al passaggio del mouse */
+background-color: #333;
+}
+
+  @media (max-width: 768px) {
+    #tabella {
+      width: 100%;  /* La tabella occupa tutta la larghezza disponibile */
+      overflow-x: auto;  /* Aggiunge uno scroll orizzontale se la tabella è larga */
+    }
+  
+    #tabella th, #tabella td {
+      padding: 8px 12px;  /* Riduce il padding per schermi piccoli */
+      font-size: 0.9em;  /* Riduce la dimensione del testo */
+    }
+}
+
+
+
+

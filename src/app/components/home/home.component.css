@@ -1,0 +1,85 @@
+.container {
+  display: flex;
+flex-direction: column; /* Dispone gli elementi verticalmente */
+justify-content: center; /* Centra gli elementi verticalmente */
+align-items: center; /* Centra gli elementi orizzontalmente */
+  position: relative;
+  
+  width:40%;
+
+}
+
+.container1 {
+  display: flex;
+flex-direction: column; /* Dispone gli elementi verticalmente */
+justify-content: center; /* Centra gli elementi verticalmente */
+align-items: center; /* Centra gli elementi orizzontalmente */
+  position: relative;
+  
+  width:200%;
+
+}
+
+/* Centra il contenitore principale (collapse) */
+
+/* Card e card-body */
+.card-body {
+  width: 600px;  /* Imposta la larghezza della card */
+  padding: 20px; /* Aggiungi del padding all'interno */
+  display: flex;
+  flex-direction: column; /* Disporre gli elementi in colonna */
+  align-items: center;  /* Centra gli elementi al suo interno */
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Aggiungi una leggera ombra alla card */
+}
+
+/* Layout della riga */
+.row-collapse {
+  display: flex;
+  justify-content: center;  /* Centra gli elementi orizzontalmente */
+  width: 100%; /* La riga occupa tutta la larghezza disponibile */
+  margin-bottom: 1rem;  /* Aggiungi spazio sotto la riga */
+}
+
+/* Etichette e input */
+.label {
+  margin-right: 5px; /* Distanza tra etichetta e input */
+  margin-top: 1rem;  /* Spazio sopra il pulsante */
+
+}
+
+.small-input {
+  height: 38px;  /* Altezza degli input */
+  padding: 0.375rem 0.75rem;  /* Padding interno */
+  width: 100px;  /* Larghezza degli input */
+  margin-right: 15px;  /* Spazio tra gli input */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);  /* Aggiungi una leggera ombra */
+  margin-top: 1rem;  /* Spazio sopra il pulsante */
+
+}
+
+/* Pulsante */
+.btn {
+  margin-top: 1rem;  /* Spazio sopra il pulsante */
+}
+
+/* Gestione degli alert */
+.alert {
+  height: 50px;
+  margin-top: 10px;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.alert-danger {
+  height: 50px;
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.alert-login {
+  height: 75px;
+}
