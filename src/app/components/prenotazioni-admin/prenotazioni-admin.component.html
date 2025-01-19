@@ -109,12 +109,30 @@
   
         <div class="modal-footer">
           <button type="button" class="btn btn-success" (click)="modificaPren(selectedPren?.id)">Modifica</button>
-          <button type="button" class="btn btn-success" (click)="elimina(selectedPren?.id)">Elimina</button>
+
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" (click)="elimina(selectedPren?.id)">Elimina</button>
+            
+            
+      
+
           <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="closeModal()">Chiudi</button>
         </div>
       </div>
     </div>
   </div>
+  </div>
+
+  <div *ngIf="eliminato" class="modal fade show d-block" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content success-modal">
+        <div class="modal-header">
+          <h5 class="modal-title text-center w-100" id="exampleModalLongTitle">Prenotazione eliminata con successo</h5>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button type="button" class="btn btn-success" (click)="chiudiModal()">Chiudi</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <ng-template #noPrenotazioni>

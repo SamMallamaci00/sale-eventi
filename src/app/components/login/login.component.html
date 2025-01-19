@@ -34,7 +34,10 @@
             <div class="form-row">
                 <div class="form-group col">
                     <label for="name">Username</label>
-                    <input type="text" class="form-control" id="name" [(ngModel)]="username" name="username">
+                    <div *ngIf="emailError" class="text-danger">
+                      Insersici uno username.
+                    </div> 
+                    <input type="text" class="form-control" id="name" [(ngModel)]="username" name="username" [ngClass]="{'is-invalid': usernameError}">
                 </div>
                 
             </div>
@@ -45,7 +48,7 @@
                   <div class="form-row">
   
                     <label for="email">Email</label>
-                    <div class="text-danger">
+                    <div *ngIf="emailError" class="text-danger">
                   Inserisci un'email valida.
                 </div> 
                   </div>
@@ -77,6 +80,16 @@
               <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" [ngClass]="{'is-invalid': passwordMismatchError}">
                 
             </div>
+    
+            <!-- Messaggio di errore -->
+            <div *ngIf="mostraErrore" class="alert alert-danger text-center" role="alert">
+              <strong>{{ erroreMessaggio }}</strong>
+            </div>
+
+            <div *ngIf="mostraSuccesso" class="alert alert-success text-center" role="alert">
+              <strong>Ti sei registrato con successo</strong>
+            </div>
+
   
   
             
@@ -84,15 +97,15 @@
               Sei già registrato? 
               <button class="btn"  type="submit"  >Accedi</button>
             </div>
-            <button class="btn" type="submit" (click)="registarti($event)"  data-toggle="modal" data-target="#registrazione">Registrati</button>
-            <div *ngIf="!emailError && !passwordMismatchError" class="modal fade" id="registrazione" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <button class="btn" type="submit" (click)="registazione($event)"  data-toggle="modal" data-target="#registrazione">Registrati</button>
+            <div *ngIf="mostraSuccesso " class="modal fade" id="registrazione" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered " role="document">
                   <div class="modal-content success-modal">
                       <div class="modal-header">
                           <h5 class="modal-title text-center w-100" id="exampleModalLongTitle">Ti sei registrato con successo</h5>
                       </div>
                       <div>
-                        <p class="text-center">Accedi per prenotare una stanza nel nostro B&B!</p>
+                        <p class="text-center">Accedi per prenotare una nuova sala! </p>
                       </div>
                       <div class="modal-footer d-flex justify-content-center">
                           <button type="button" class="btn btn-success" data-dismiss="modal">Chiudi</button>

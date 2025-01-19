@@ -85,40 +85,52 @@ export class AreaRiservataClienteComponent implements OnInit{
   
     let filtroAttivo = 0;
 
-if (sala != null && sala != "") filtroAttivo += 1;
-if (data != null && data != "") filtroAttivo += 2;
-
-switch (filtroAttivo) {
-  case 0:
-    // Nessun filtro applicato
-    console.log("Nessun filtro applicato, eseguo la ricerca globale.");
-    this.prenotazioni = this.prenotazioniRicerca;
-    break;
-  case 1:
-    // Solo sala
-    console.log("Filtro per sala applicato.");
-    this.prenotazioni = this.prenotazioniRicerca.filter(p => p.sala.nome === this.sala);
-    break;
-  case 2:
-    // Solo data
-    console.log("Filtro per data applicato.");
-    this.prenotazioni = this.prenotazioniRicerca.filter(p => p.data === this.data);
-    break;
-  case 3:
-    // Sala e data
-    console.log("Filtro per sala e data applicati.");
-    this.prenotazioni = this.prenotazioniRicerca.filter(p => p.sala.nome === this.sala && p.data === this.data);
-    break;
-  default:
-    console.log("Filtro non riconosciuto.");
-    this.prenotazioni = this.prenotazioniRicerca;
-}
-console.log("Prenotazioni aggiornate:", this.prenotazioni);
-
-  }else{
-    console.log("dentro else")
-  }
-  
+    if (sala != null && sala.trim() !== "") filtroAttivo += 1;
+    if (data != null && data.trim() !== "") filtroAttivo += 2;
+    
+    switch (filtroAttivo) {
+      case 0:
+        // Nessun filtro applicato
+        console.log("Nessun filtro applicato, eseguo la ricerca globale.");
+        this.prenotazioni = this.prenotazioniRicerca;
+        break;
+      case 1:
+        // Solo sala
+        console.log("Filtro per sala applicato.");
+        this.prenotazioni = this.prenotazioniRicerca.filter(p => 
+          p.sala.nome.toLowerCase().replace(/\s+/g, "").includes(
+            this.sala.toLowerCase().replace(/\s+/g, "").trim()
+          )
+        );
+        break;
+      case 2:
+        // Solo data
+        console.log("Filtro per data applicato.");
+        this.prenotazioni = this.prenotazioniRicerca.filter(p => 
+          p.data === this.data.trim()
+        );
+        break;
+      case 3:
+        // Sala e data
+        console.log("Filtro per sala e data applicati.");
+        this.prenotazioni = this.prenotazioniRicerca.filter(p => 
+          p.sala.nome.toLowerCase().replace(/\s+/g, "").includes(
+            this.sala.toLowerCase().replace(/\s+/g, "").trim()
+          ) &&
+          p.data === this.data.trim()
+        );
+        break;
+      default:
+        console.log("Filtro non riconosciuto.");
+        this.prenotazioni = this.prenotazioniRicerca;
+    }
+    
+    console.log("Prenotazioni aggiornate:", this.prenotazioni);
+    
+    } else {
+      console.log("Dentro else");
+    }
+    
   this.cdr.detectChanges(); // Forza il rilevamento delle modifiche
 
 

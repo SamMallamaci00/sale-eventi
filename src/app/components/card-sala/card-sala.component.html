@@ -1,8 +1,14 @@
-<div class="card mx-auto" style="width: 18rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" id="ciao">
-  <img class="card-img-top" src="assets/images/sala_prova.jpeg" alt="Card image cap" style="border-top-left-radius: .25rem; border-top-right-radius: .25rem;">
-  <div class="card-body">
-    <h5 class="card-title">{{ data.nome }}</h5>
-    <p class="card-text">Prezzo per evento: <strong>€ {{ data.prezzo }}</strong></p>
-    <p class="card-text">Capienza massima: <strong>{{ data.capienza }} persone</strong></p>
+<div class="d-flex flex-wrap justify-content-center">
+  <div class="card mx-2" style="width: 18rem; height: 400px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" id="ciao">
+    <img 
+      class="card-img-top" 
+      [src]="'data:image/jpeg;base64,' + data.immagine"  
+      alt="Card image cap" 
+      style="border-top-left-radius: .25rem; border-top-right-radius: .25rem; height: 200px; object-fit: cover;">
+    <div class="card-body" style="display: flex; flex-direction: column; justify-content: space-between;">
+      <h5 class="card-title">{{ data.nome }}</h5>
+      <p class="card-text">Prezzo per evento: <strong>€ {{ data.prezzo }}</strong></p>
+      <p class="card-text">Capienza massima: <strong>{{ data.capienza }} persone</strong></p>
+    </div>
   </div>
 </div>

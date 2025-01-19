@@ -98,19 +98,17 @@ export class AuthServiceService {
     }
 
 
-    registrazione(email: string, password: string, nome: string, cognome: string, ruolo: string): Observable<String> {
+    registrazione(email: string, password: string, username: string): Observable<String> {
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       
     
       let params = new HttpParams()
-      .set('nome', nome)
-      .set('cognome', cognome)
-      .set('email',email)
-      .set('password', password)
-      .set('ruolo', ruolo);
+      .set('email', email)
+      .set('username', username)
+      .set('password', password);
   
     // Chiamata HTTP POST
-    return this.http.post<String>(`${this.url}/nuovoUtente`, null, { headers, params, responseType: 'text' as 'json' });
+    return this.http.post<String>(`${this.url}/registrazione`, null, { headers, params, responseType: 'text' as 'json' });
 
       
     }

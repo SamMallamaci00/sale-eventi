@@ -36,6 +36,7 @@ export class PrenotazioniAdminComponent {
   mostraSuccesso: boolean = false ;
   mostraErrore: boolean = false;
   erroreMessaggio: string = "";
+  eliminato: boolean = false;
 
 
 
@@ -150,26 +151,57 @@ export class PrenotazioniAdminComponent {
   }
   
 
-  elimina(idPren : number){
+  elimina(idPren: number) {
     this.prenServ.deletePren(idPren).subscribe(
       result => {
         this.prenotazioni = this.prenotazioni?.filter(prenotazione => prenotazione.id !== idPren);
         this.prenServ.getAllPrenotazioni().subscribe(
           (result) => {
-            this.prenotazioniRicerca = result; // Aggiorna le prenotazioni ricercate
-            this.caricaDati(); // Ricarica la tabella con i nuovi dati
-          },(error) => {
+            this.prenotazioniRicerca = result;
+            this.caricaDati();
+  
+            this.showModal = false
+            // Chiudi il modal principale prima di mostrare la conferma
+  
+            // Mostra il modal di conferma
+            setTimeout(() => {
+              this.eliminato = true;
+            }, 0);
+          },
+          (error) => {
             console.error("Errore durante il recupero delle prenotazioni aggiornate:", error);
           }
         );
+      },
+      (error) => {
+        console.error("Errore durante l'eliminazione della prenotazione:", error);
       }
     );
-    this.closeModal()
   }
+  
+
+  chiudiModal() {
+    this.eliminato = false; // Nasconde il modal di conferma
+    
+    // Rimuovi il backdrop dal DOM
+    const modalBackdrop = document.querySelector('.modal-backdrop');
+    if (modalBackdrop) {
+      modalBackdrop.remove();
+    }
+  
+    // Rimuovi la classe che impedisce lo scrolling
+    document.body.classList.remove('modal-open');
+    document.body.style.removeProperty('overflow');
+    document.body.style.removeProperty('padding-right'); // Rimuovi padding aggiuntivo
+  }
+  
+  
 
 
 
   caricaDati(){
+
+    this.eliminato = false
     const sala = this.route.snapshot.queryParamMap.get('sala') || "";
     const data = this.route.snapshot.queryParamMap.get('data')|| "";
     const cliente = this.route.snapshot.queryParamMap.get('cliente')|| "";
@@ -186,57 +218,91 @@ export class PrenotazioniAdminComponent {
   
     let filtroAttivo = 0;
 
-    if(sala != null && sala != "") filtroAttivo +=1
-    if(cliente != null && cliente != "") filtroAttivo +=2
-    if(data != null && data != "") filtroAttivo +=4
+    if (sala != null && sala.trim() !== "") filtroAttivo += 1;
+if (cliente != null && cliente.trim() !== "") filtroAttivo += 2;
+if (data != null && data.trim() !== "") filtroAttivo += 4;
 
-    switch (filtroAttivo) {
-      case 0:
-        // Nessun filtro applicato
-        console.log("Nessun filtro applicato, eseguo la ricerca globale.");
-        this.prenotazioni = this.prenotazioniRicerca;
-        break;
-      case 1:
-        // Solo sala
-        console.log("Filtro per sala applicato.");
-        this.prenotazioni = this.prenotazioniRicerca.filter(p => p.sala.nome === this.sala);
-        break;
-      case 2:
-        // Solo cliente
-        console.log("Filtro per cliente applicato.");
-        this.prenotazioni = this.prenotazioniRicerca.filter(p => p.cliente.username === this.cliente);
-        break;
-      case 3:
-        // Sala e cliente
-        console.log("Filtro per sala e cliente applicati.");
-        this.prenotazioni = this.prenotazioniRicerca.filter(p => p.sala.nome === this.sala && p.cliente.username === this.cliente);
-        break;
-      case 4:
-        // Solo data
-        console.log("Filtro per data applicato.");
-        this.prenotazioni = this.prenotazioniRicerca.filter(p => p.data === this.data);
-        break;
-      case 5:
-        // Sala e data
-        console.log("Filtro per sala e data applicati.");
-        this.prenotazioni = this.prenotazioniRicerca.filter(p => p.sala.nome === this.sala && p.data === this.data);
-        break;
-      case 6:
-        // Cliente e data
-        console.log("Filtro per cliente e data applicati.");
-        this.prenotazioni = this.prenotazioniRicerca.filter(p => p.cliente.username === this.cliente && p.data === this.data);
-        break;
-      case 7:
-        // Sala, cliente e data
-        console.log("Filtro per sala, cliente e data applicati.");
-        this.prenotazioni = this.prenotazioniRicerca.filter(
-          p => p.sala.nome === this.sala && p.cliente.username === this.cliente && p.data === this.data
-        );
-        break;
-      default:
-        console.log("Filtro non riconosciuto.");
-        this.prenotazioni = this.prenotazioniRicerca;
-    }
+switch (filtroAttivo) {
+  case 0:
+    // Nessun filtro applicato
+    console.log("Nessun filtro applicato, eseguo la ricerca globale.");
+    this.prenotazioni = this.prenotazioniRicerca;
+    break;
+  case 1:
+    // Solo sala
+    console.log("Filtro per sala applicato.");
+    this.prenotazioni = this.prenotazioniRicerca.filter(p =>
+      p.sala.nome.toLowerCase().replace(/\s+/g, "").includes(
+        this.sala.toLowerCase().replace(/\s+/g, "").trim()
+      )
+    );
+    break;
+  case 2:
+    // Solo cliente
+    console.log("Filtro per cliente applicato.");
+    this.prenotazioni = this.prenotazioniRicerca.filter(p =>
+      p.cliente.username.toLowerCase().replace(/\s+/g, "").includes(
+        this.cliente.toLowerCase().replace(/\s+/g, "").trim()
+      )
+    );
+    break;
+  case 3:
+    // Sala e cliente
+    console.log("Filtro per sala e cliente applicati.");
+    this.prenotazioni = this.prenotazioniRicerca.filter(p =>
+      p.sala.nome.toLowerCase().replace(/\s+/g, "").includes(
+        this.sala.toLowerCase().replace(/\s+/g, "").trim()
+      ) &&
+      p.cliente.username.toLowerCase().replace(/\s+/g, "").includes(
+        this.cliente.toLowerCase().replace(/\s+/g, "").trim()
+      )
+    );
+    break;
+  case 4:
+    // Solo data
+    console.log("Filtro per data applicato.");
+    this.prenotazioni = this.prenotazioniRicerca.filter(p =>
+      p.data === this.data
+    );
+    break;
+  case 5:
+    // Sala e data
+    console.log("Filtro per sala e data applicati.");
+    this.prenotazioni = this.prenotazioniRicerca.filter(p =>
+      p.sala.nome.toLowerCase().replace(/\s+/g, "").includes(
+        this.sala.toLowerCase().replace(/\s+/g, "").trim()
+      ) &&
+      p.data === this.data
+    );
+    break;
+  case 6:
+    // Cliente e data
+    console.log("Filtro per cliente e data applicati.");
+    this.prenotazioni = this.prenotazioniRicerca.filter(p =>
+      p.cliente.username.toLowerCase().replace(/\s+/g, "").includes(
+        this.cliente.toLowerCase().replace(/\s+/g, "").trim()
+      ) &&
+      p.data === this.data
+    );
+    break;
+  case 7:
+    // Sala, cliente e data
+    console.log("Filtro per sala, cliente e data applicati.");
+    this.prenotazioni = this.prenotazioniRicerca.filter(p =>
+      p.sala.nome.toLowerCase().replace(/\s+/g, "").includes(
+        this.sala.toLowerCase().replace(/\s+/g, "").trim()
+      ) &&
+      p.cliente.username.toLowerCase().replace(/\s+/g, "").includes(
+        this.cliente.toLowerCase().replace(/\s+/g, "").trim()
+      ) &&
+      p.data === this.data
+    );
+    break;
+  default:
+    console.log("Filtro non riconosciuto.");
+    this.prenotazioni = this.prenotazioniRicerca;
+}
+
   }else{
     console.log("dentro else")
   }

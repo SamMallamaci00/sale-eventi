@@ -89,10 +89,12 @@
       </div>
 
       <div class="modal-body">
-        
 
-        <p><strong>Descrizione:</strong> </p>
-        <p [innerHTML]="formatDescription(selectedSala?.descrizione)"></p>
+        
+        <img class="card-img-top"  [src]="'data:image/jpeg;base64,' + selectedSala?.immagine"  alt="Card image cap" style="border-top-left-radius: .25rem; border-top-right-radius: .25rem; margin-bottom: 15px;">
+
+
+        <p [innerHTML]="'<b>Descrizione:</b><br>' + formatDescription(selectedSala?.descrizione)"></p>
         <p><strong>Prezzo per evento:</strong> € {{ selectedSala?.prezzo }}</p>
         <p><strong>Capienza massima:</strong> {{ selectedSala?.capienza }} persone</p>
 

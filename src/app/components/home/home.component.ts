@@ -37,74 +37,8 @@ export class HomeComponent implements OnInit{
 
   }
 
- /*sale: SalaEvento[] = [
-    {
-      id: 5,
-      capienza: 50,
-      prezzo: 30,
-      nome: "Nome esempio",
-      immagine: "src/assets/images/sala_prova.jpeg",
-      descrizione: "Descrizione esempio"
-    },
-    {
-      id: 6,
-      capienza: 80,
-      prezzo: 50,
-      nome: "Sala A",
-      immagine: "src/assets/images/sala_prova.jpeg",
-      descrizione: "Una sala spaziosa e moderna"
-    },
-    {
-      id: 7,
-      capienza: 100,
-      prezzo: 75,
-      nome: "Sala B",
-      immagine: "src/assets/images/sala_prova.jpeg",
-      descrizione: "Perfetta per eventi di grande portata"
-    },
-    {
-      id: 8,
-      capienza: 150,
-      prezzo: 100,
-      nome: "Sala C",
-      immagine: "src/assets/images/sala_prova.jpeg",
-      descrizione: "Sala con tecnologia avanzata"
-    },
-    {
-      id: 9,
-      capienza: 200,
-      prezzo: 120,
-      nome: "Sala D",
-      immagine: "src/assets/images/sala_prova.jpeg",
-      descrizione: "La più grande sala disponibile"
-    },
-    {
-      id: 9,
-      capienza: 200,
-      prezzo: 120,
-      nome: "Sala D",
-      immagine: "src/assets/images/sala_prova.jpeg",
-      descrizione: "La più grande sala disponibile"
-    },
-    {
-      id: 9,
-      capienza: 200,
-      prezzo: 120,
-      nome: "Sala D",
-      immagine: "src/assets/images/sala_prova.jpeg",
-      descrizione: "La più grande sala disponibile"
-    },
-    {
-      id: 9,
-      capienza: 200,
-      prezzo: 120,
-      nome: "Sala D",
-      immagine: "src/assets/images/sala_prova.jpeg",
-      descrizione: "La più grande sala disponibile"
-    }
-  ];*/
+ 
 
-  
   sale : SalaEvento[] =  [];
   saleRicerca : SalaEvento[] =  []
   saleFiltri : SalaEvento[] =  []
@@ -180,7 +114,7 @@ if (capienza != null && capienza != "") filtroAttivo += 2;
   case 1:
     // Solo sala
     console.log("Filtro per prezzo applicato.");
-    this.sale = this.saleRicerca.filter(p => p.prezzo >= this.prezzo);
+    this.sale = this.saleRicerca.filter(p => p.prezzo <= this.prezzo);
     break;
   case 2:
     // Solo data
@@ -190,7 +124,7 @@ if (capienza != null && capienza != "") filtroAttivo += 2;
   case 3:
     // Sala e data
     console.log("Filtro per prezzo e capienza applicati.");
-    this.sale = this.saleRicerca.filter(p => p.prezzo >= this.prezzo && p.capienza >= this.capienza);
+    this.sale = this.saleRicerca.filter(p => p.prezzo <= this.prezzo && p.capienza >= this.capienza);
     break;
   default:
     console.log("Filtro non riconosciuto.");
